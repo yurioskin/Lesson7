@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Lesson7</string>
+    <string name="caller_name">Caller name</string>
+    <string name="time">time</string>
+    <string name="sender_name">Sender name</string>
+    <string name="content_sms">Content sms</string>
+
+    <string name="purchase">Purchase: %1$s</string>
+    <string name="card_number">Card ** %1$s</string>
+    <string name="write_off">Write-off: %1$s ₽</string>
+    <string name="balance">Balance: %1$s ₽</string>
+    <string name="sberbank">SBERBANK</string>
+    <string name="notifications">Notifications</string>
+
+
+</resources>
