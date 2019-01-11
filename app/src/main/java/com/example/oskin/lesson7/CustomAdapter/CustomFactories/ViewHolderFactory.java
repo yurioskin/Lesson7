@@ -8,5 +8,5 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public interface ViewHolderFactory {
 
-    RecyclerView.ViewHolder createViewHolder(ViewGroup parent, LayoutInflater inflater);
+    RecyclerView.ViewHolder createViewHolder(Context context, ViewGroup parent, LayoutInflater inflater);
 }

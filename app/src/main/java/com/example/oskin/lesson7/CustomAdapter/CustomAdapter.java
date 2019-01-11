@@ -29,7 +29,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private SparseArray<ViewHolderFactory> mFactoryMap;
     private Context mContext;
 
-    public CustomAdapter(Context context, List<MyNotification> data){
+    public CustomAdapter(Context context){
         mContext = context;
         mBinders = new ArrayList<>();
         initFactory();
@@ -58,7 +58,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ViewHolderFactory factory = mFactoryMap.get(viewType);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return factory.createViewHolder(parent, inflater);
+        return factory.createViewHolder(mContext, parent, inflater);
     }
 
     @Override

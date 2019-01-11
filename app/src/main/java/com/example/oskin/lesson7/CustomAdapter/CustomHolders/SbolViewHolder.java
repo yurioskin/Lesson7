@@ -1,6 +1,8 @@
 package com.example.oskin.lesson7.CustomAdapter.CustomHolders;
 
+import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.oskin.lesson7.R;
@@ -17,7 +19,7 @@ public class SbolViewHolder extends RecyclerView.ViewHolder{
     public TextView time;
     public ImageView storeLogo;
 
-    public SbolViewHolder(@NonNull View itemView) {
+    public SbolViewHolder(Context context, ViewGroup parent, @NonNull View itemView) {
         super(itemView);
         storePurchase = itemView.findViewById(R.id.sbol_layout_purchase);
         cardNumber = itemView.findViewById(R.id.sbol_layout_card_number);
@@ -25,6 +27,8 @@ public class SbolViewHolder extends RecyclerView.ViewHolder{
         balance = itemView.findViewById(R.id.sbol_layout_balance);
         time = itemView.findViewById(R.id.sbol_layout_time);
         storeLogo = itemView.findViewById(R.id.sbol_layout_store_image);
+
+        itemView.setOnClickListener((View.OnClickListener) context);
     }
 
 

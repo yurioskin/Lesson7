@@ -1,20 +1,17 @@
 package com.example.oskin.lesson7.Data;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataUtils {
 
-    public static List<MyNotification> generateData(Context context){
+    public static List<MyNotification> generateData(){
         List<MyNotification> notifications = new ArrayList<>();
 
         notifications.add(new Call("John","9:30 AM"));
         notifications.add(new Call("Rob","9:40 AM"));
         notifications.add(new SMS("Sandy","Hey, what's up?","9:42 AM"));
         notifications.add(new Sbol(
-                context,
                 "McDonald’s",
                 "https://i.ibb.co/3dcKh9n/ec8310bd6a3a14130896df93ed6fbfc4.png",
                 "5678",
@@ -24,7 +21,6 @@ public class DataUtils {
         notifications.add(new Call("Peter","9:45 AM"));
         notifications.add(new SMS("John","Are you writing blog?","9:48 AM"));
         notifications.add(new Sbol(
-                context,
                 "Leroy Merlin",
                 "https://i.ibb.co/b21V5mz/i.jpg",
                 "5678",
@@ -34,7 +30,6 @@ public class DataUtils {
         notifications.add(new Call("Jack","9:50 AM"));
         notifications.add(new SMS("Kora","Thanks dude","9:51 AM"));
         notifications.add(new Sbol(
-                context,
                 "Billa",
                 "https://i.ibb.co/Yh5NYRn/15976.jpg",
                 "5678",

@@ -1,6 +1,8 @@
 package com.example.oskin.lesson7.Data;
 
-public interface MyNotification {
-    int getType();
+import android.os.Parcelable;
+
+public abstract class MyNotification implements Parcelable {
+    public abstract int getType();
 
 }

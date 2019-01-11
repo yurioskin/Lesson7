@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SMSViewHolderFactory implements ViewHolderFactory {
     @Override
-    public RecyclerView.ViewHolder createViewHolder(ViewGroup parent, LayoutInflater inflater) {
+    public RecyclerView.ViewHolder createViewHolder(Context context, ViewGroup parent, LayoutInflater inflater) {
 
         View itemView = inflater.inflate(R.layout.sms_feed_layout, parent, false);
-        RecyclerView.ViewHolder holder = new SMSViewHolder(itemView);
+        RecyclerView.ViewHolder holder = new SMSViewHolder(context, itemView);
         return holder;
     }
 }

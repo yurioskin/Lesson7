@@ -1,11 +1,12 @@
 package com.example.oskin.lesson7.Data;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.oskin.lesson7.R;
 
-public class Sbol implements MyNotification {
-    private Context mContext;
+public class Sbol extends MyNotification {
     private String mStorePurchase;
     private String mImageStoreUrl;
     private String mCardNumber;
@@ -13,13 +14,12 @@ public class Sbol implements MyNotification {
     private String mBalance;
     private String mTime;
 
-    public Sbol(Context context, String storePurchase, String imageStoreUrl, String cardNumber, String writeOff, String balance, String time) {
-        mContext = context;
-        mStorePurchase = context.getResources().getString(R.string.purchase, storePurchase);
+    public Sbol(String storePurchase, String imageStoreUrl, String cardNumber, String writeOff, String balance, String time) {
+        mStorePurchase = storePurchase;
         mImageStoreUrl = imageStoreUrl;
-        mCardNumber = context.getResources().getString(R.string.card_number, cardNumber);
-        mWriteOff = context.getResources().getString(R.string.write_off, writeOff);
-        mBalance = context.getResources().getString(R.string.balance, balance);
+        mCardNumber = cardNumber;
+        mWriteOff = writeOff;
+        mBalance = balance;
         mTime = time;
     }
 
@@ -51,4 +51,41 @@ public class Sbol implements MyNotification {
     public int getType() {
         return ItemTypes.SBOL.getType();
     }
+
+    protected Sbol(Parcel in) {
+        mStorePurchase = in.readString();
+        mImageStoreUrl = in.readString();
+        mCardNumber = in.readString();
+        mWriteOff = in.readString();
+        mBalance = in.readString();
+        mTime = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mStorePurchase);
+        dest.writeString(mImageStoreUrl);
+        dest.writeString(mCardNumber);
+        dest.writeString(mWriteOff);
+        dest.writeString(mBalance);
+        dest.writeString(mTime);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Sbol> CREATOR = new Parcelable.Creator<Sbol>() {
+        @Override
+        public Sbol createFromParcel(Parcel in) {
+            return new Sbol(in);
+        }
+
+        @Override
+        public Sbol[] newArray(int size) {
+            return new Sbol[size];
+        }
+    };
 }

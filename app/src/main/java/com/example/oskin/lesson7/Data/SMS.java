@@ -1,6 +1,9 @@
 package com.example.oskin.lesson7.Data;
 
-public class SMS implements MyNotification {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class SMS extends MyNotification {
     private String mSenderName;
     private String mSMSContent;
     private String mSMSTime;
@@ -27,4 +30,35 @@ public class SMS implements MyNotification {
     public int getType() {
         return ItemTypes.SMS.getType();
     }
+
+    protected SMS(Parcel in) {
+        mSenderName = in.readString();
+        mSMSContent = in.readString();
+        mSMSTime = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mSenderName);
+        dest.writeString(mSMSContent);
+        dest.writeString(mSMSTime);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<SMS> CREATOR = new Parcelable.Creator<SMS>() {
+        @Override
+        public SMS createFromParcel(Parcel in) {
+            return new SMS(in);
+        }
+
+        @Override
+        public SMS[] newArray(int size) {
+            return new SMS[size];
+        }
+    };
 }
