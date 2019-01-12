@@ -8,6 +8,8 @@ public class DataUtils {
     public static List<MyNotification> generateData(){
         List<MyNotification> notifications = new ArrayList<>();
 
+        notifications.add(new SectionItems("Section 1", DataUtils.generateItems(10)));
+
         notifications.add(new Call("John","9:30 AM"));
         notifications.add(new Call("Rob","9:40 AM"));
         notifications.add(new SMS("Sandy","Hey, what's up?","9:42 AM"));
@@ -40,6 +42,7 @@ public class DataUtils {
         notifications.add(new Call("Kate","10:05 AM"));
         notifications.add(new SMS("Nick","Let's hang up","10:10 AM"));
         notifications.add(new Call("Roger","10:15 AM"));
+        notifications.add(new SectionItems("Section 2", DataUtils.generateItems(7)));
         notifications.add(new Call("Sid","10:20 AM"));
         notifications.add(new Call("Kora","10:25 AM"));
         notifications.add(new Call("Nick","10:30 AM"));
@@ -48,6 +51,14 @@ public class DataUtils {
         notifications.add(new Call("Scott","10:45 AM"));
 
         return notifications;
+    }
+
+    public static List<MyNotification> generateItems(int amountItems){
+        List<MyNotification> itemList = new ArrayList<>();
+        for (int i = 0; i < amountItems; i++){
+            itemList.add(new Item("Number: " + i, "Content: " + i));
+        }
+        return itemList;
     }
 
 }

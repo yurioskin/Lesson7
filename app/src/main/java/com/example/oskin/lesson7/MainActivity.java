@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.oskin.lesson7.CustomAdapter.CustomAdapter;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CustomAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private MyResultReceiver mResultReceiver;
+    private ProgressBar mProgressBar;
 
     private List<MyNotification> mData;
 
@@ -32,16 +34,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mProgressBar = findViewById(R.id.main_progressBar);
         initRecyclerView();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         initData();
     }
 
     private void initData() {
+        mProgressBar.setVisibility(View.VISIBLE);
         mResultReceiver = new MyResultReceiver(new Handler());
         mResultReceiver.setReceiver(this);
         MyIntentService.startActionLoadData(this,mResultReceiver);
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (resultCode == MyIntentService.GET_DATA){
             mData = resultData.getParcelableArrayList(MyResultReceiver.RESULT_RECEIVER);
             mAdapter.setData(mData);
+            mProgressBar.setVisibility(View.GONE);
         }
     }
 
@@ -72,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "SMS notification", Toast.LENGTH_SHORT).show();
         } else if (v.getId() == R.id.sbol_layout){
             Toast.makeText(this, "Sberbank notification", Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.item_layout){
+            Toast.makeText(this, "Item notification", Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.section_layout){
+            Toast.makeText(this, "Section items notification", Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.section_layout_btn){
+            Toast.makeText(this, "Button pressed", Toast.LENGTH_SHORT).show();
         }
     }
 }

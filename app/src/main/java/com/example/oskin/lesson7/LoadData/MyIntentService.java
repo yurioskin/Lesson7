@@ -45,6 +45,15 @@ public class MyIntentService extends IntentService {
     }
 
     private void handleActionLoadData(ResultReceiver resultReceiver){
+        //just test code for simulation loading from database
+        /*try {
+            // Sleep for 200 milliseconds.
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
+
         mMyNotifications = DataUtils.generateData();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(MyResultReceiver.RESULT_RECEIVER, (ArrayList<MyNotification>) mMyNotifications);

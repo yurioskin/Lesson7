@@ -4,7 +4,9 @@ public enum ItemTypes {
     CALL(0),
     SMS(1),
     SBOL(2),
-    OTHER_ITEM(3);
+    ITEM(3),
+    SECTION_ITEM(4),
+    OTHER_ITEM(5);
 
     private int type;
 
