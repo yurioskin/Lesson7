@@ -3,6 +3,7 @@ package com.example.oskin.lesson7;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView.LayoutManager mLayoutManager;
     private MyResultReceiver mResultReceiver;
     private ProgressBar mProgressBar;
-
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<MyNotification> mData;
 
     @Override
@@ -35,8 +36,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mProgressBar = findViewById(R.id.main_progressBar);
+        mSwipeRefreshLayout = findViewById(R.id.main_swipe_refresh_layout);
+
+        //TODO separate method
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshItem();
+            }
+        });
+
         initRecyclerView();
         initData();
+    }
+
+    private void refreshItem(){
+        Toast.makeText(this, "Refresh", Toast.LENGTH_SHORT).show();
+        MyIntentService.startActionUpdateData(this,mResultReceiver);
     }
 
     private void initData() {
@@ -61,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mData = resultData.getParcelableArrayList(MyResultReceiver.RESULT_RECEIVER);
             mAdapter.setData(mData);
             mProgressBar.setVisibility(View.GONE);
+        } else if (resultCode == MyIntentService.GET_UPDATED_DATA){
+            mData = resultData.getParcelableArrayList(MyResultReceiver.RESULT_RECEIVER);
+            mSwipeRefreshLayout.setRefreshing(false);
+            mAdapter.updateData(mData);
+            mLayoutManager.scrollToPosition(0);
         }
     }
 

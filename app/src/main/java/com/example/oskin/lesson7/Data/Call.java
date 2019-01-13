@@ -3,6 +3,8 @@ package com.example.oskin.lesson7.Data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
 public class Call extends MyNotification{
     private String mCallerName;
     private String mCallTime;
@@ -53,4 +55,19 @@ public class Call extends MyNotification{
             return new Call[size];
         }
     };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Call call = (Call) o;
+        return Objects.equals(mCallerName, call.mCallerName) &&
+                Objects.equals(mCallTime, call.mCallTime);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mCallerName, mCallTime);
+    }
 }

@@ -6,6 +6,8 @@ import android.os.Parcelable;
 
 import com.example.oskin.lesson7.R;
 
+import java.util.Objects;
+
 public class Sbol extends MyNotification {
     private String mStorePurchase;
     private String mImageStoreUrl;
@@ -88,4 +90,23 @@ public class Sbol extends MyNotification {
             return new Sbol[size];
         }
     };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sbol sbol = (Sbol) o;
+        return Objects.equals(mStorePurchase, sbol.mStorePurchase) &&
+                Objects.equals(mImageStoreUrl, sbol.mImageStoreUrl) &&
+                Objects.equals(mCardNumber, sbol.mCardNumber) &&
+                Objects.equals(mWriteOff, sbol.mWriteOff) &&
+                Objects.equals(mBalance, sbol.mBalance) &&
+                Objects.equals(mTime, sbol.mTime);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mStorePurchase, mImageStoreUrl, mCardNumber, mWriteOff, mBalance, mTime);
+    }
 }

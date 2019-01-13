@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -47,6 +48,17 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             mBinders.add(generateBinder(notification));
         }
         notifyDataSetChanged();
+    }
+
+    public void updateData(List<MyNotification> data){
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffCallback(mData,data));
+        mData = data;
+        mBinders.clear();
+        for (MyNotification notification: mData) {
+            mBinders.add(generateBinder(notification));
+        }
+        diffResult.dispatchUpdatesTo(this);
+
     }
 
 
@@ -74,6 +86,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             binder.bindViewHolder(mContext, holder);
         }
     }
+
 
     private ViewHolderBinder generateBinder(MyNotification notification) {
         if (notification.getType() == ItemTypes.CALL.getType()){
