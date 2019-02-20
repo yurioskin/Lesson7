@@ -29,20 +29,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<MyNotification> mData = new ArrayList<>();
+    private List<MyNotification> mData;
     private final List<ViewHolderBinder> mBinders;
     private SparseArray<ViewHolderFactory> mFactoryMap;
     private Context mContext;
 
     public CustomAdapter(Context context){
         mContext = context;
+        mData = new ArrayList<>();
         mBinders = new ArrayList<>();
         initFactory();
 
     }
 
     public void setData(List<MyNotification> data) {
-        mData = data;
+        mData.clear();
+        mData.addAll(data);
         mBinders.clear();
         for (MyNotification notification: mData) {
             mBinders.add(generateBinder(notification));
@@ -52,15 +54,14 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public void updateData(List<MyNotification> data){
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffCallback(mData,data));
-        mData = data;
+        mData.clear();
+        mData.addAll(data);
         mBinders.clear();
         for (MyNotification notification: mData) {
             mBinders.add(generateBinder(notification));
         }
         diffResult.dispatchUpdatesTo(this);
-
     }
-
 
     private void initFactory() {
         mFactoryMap = new SparseArray<>();
@@ -110,17 +111,6 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        if (mData.get(position).getType() == ItemTypes.CALL.getType()) {
-            return ItemTypes.CALL.getType();
-        } else if (mData.get(position).getType() == ItemTypes.SMS.getType()) {
-            return ItemTypes.SMS.getType();
-        } else if (mData.get(position).getType() == ItemTypes.SBOL.getType()) {
-            return ItemTypes.SBOL.getType();
-        } else if (mData.get(position).getType() == ItemTypes.ITEM.getType()) {
-            return ItemTypes.ITEM.getType();
-        } else if (mData.get(position).getType() == ItemTypes.SECTION_ITEM.getType()) {
-            return ItemTypes.SECTION_ITEM.getType();
-        }
         return mData.get(position).getType();
     }
 }

@@ -23,7 +23,9 @@
 
         <service
             android:name=".LoadData.MyIntentService"
-            android:exported="false"></service>
+            android:exported="false">
+
+        </service>
     </application>
 
 </manifest>
